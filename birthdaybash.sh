@@ -41,9 +41,7 @@ if [ $day -eq $DAY -a $month = $MON ]
                                                                  else
                                                                     echo "No birthdays today"
                                                                     fi
-                                                                    
-   #############read the file from user same
-   
+
    
    
    
