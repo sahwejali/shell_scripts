@@ -1,0 +1,35 @@
+#!/bin/bash
+LIMIT=5
+INFILE="$/home/mobaxterm/mscript/bday.csv"
+OFILE="$birtday_out
+MAIL="$sahwejali@gmail.com"
+
+for (( i=1 i<=5 i++))
+do
+arr[$i]=date '+%d-%b' -d $30 days
+done
+while IFS=",-" read name day month year
+
+for DAT in ${arr[@]}
+    do
+       DAY=${DAT:0:2}
+       MON=`echo ${DAT:3:3} | awk '{print toupper($0);}'`
+       day=`printf "%02d\n" $day`
+       month=`echo $month |  awk '{print toupper($0);}'`
+       if [ $day -eq $DAY -a $month = $MON ]
+       then
+         echo $name : $DAT
+         break;
+       fi
+    done
+done < $IFILE > $OFILE
+
+if [ -f $OFILE -a -s $OFILE ]
+then
+   sed -i '1i The users celebrating their birthday are:\n' $OFILE
+   mailx -s "Birthday List: " $MAILID  < $OFILE
+   \rm $OFILE
+   echo "Birthday mail sent"
+else
+   echo "No birthdays."
+fi
